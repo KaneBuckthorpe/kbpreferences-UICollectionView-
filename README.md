@@ -1,12 +1,12 @@
 # kbpreferences
 
-###General 
+### General 
 
 |  Key |             |                  |
 |:----:|:-----------:|:----------------:|
 | cell | KBGroupCell | KBCollectionCell |
 
-###KBGroupCell
+### KBGroupCell
 
 |       Key       |   Type  | Options |
 |:---------------:|:-------:|:-------:|
@@ -15,7 +15,7 @@
 | footerText      | STRING  |         |
 | height          | INTEGER |         |
 
-###KBCollectionCell
+### KBCollectionCell
 
 |       Key       |   Type  | Options |
 |:---------------:|:-------:|:-------:|
