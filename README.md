@@ -2,9 +2,9 @@
 
 ### General 
 
-|  Key |             |                  |
+|  Key |     Type    |      Options     |
 |:----:|:-----------:|:----------------:|
-| cell | KBGroupCell | KBCollectionCell |
+| cell |  | KBCollectionCell, KBGroupCell |
 
 ### KBGroupCell
 
