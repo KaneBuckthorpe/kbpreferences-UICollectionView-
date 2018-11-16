@@ -1,6 +1,7 @@
 # kbpreferences
 
 ###General 
+
 |  Key |             |                  |
 |:----:|:-----------:|:----------------:|
 | cell | KBGroupCell | KBCollectionCell |
