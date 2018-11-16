@@ -19,4 +19,4 @@
 
 |       Key       |   Type  | Options |
 |:---------------:|:-------:|:-------:|
-| cellClass | UICollectionReusableView subclass |   |
+| cellClass | UICollectionViewReusableCell subclass |   |
