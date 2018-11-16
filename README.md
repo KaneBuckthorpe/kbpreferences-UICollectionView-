@@ -6,6 +6,7 @@
 |:----:|:-----------:|:----------------:|
 | cell |  | KBCollectionCell, KBGroupCell |
 |      label      |  STRING |         |
+| height          | INTEGER |         |
 
 ### KBGroupCell
 
@@ -13,7 +14,6 @@
 |:---------------:|:-------:|:-------:|
 | footerAlignment | INTEGER | 0,1,2   |
 | footerText      | STRING  |         |
-| height          | INTEGER |         |
 
 ### KBCollectionCell
 
