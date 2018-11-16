@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "KBCollectionCell.h"
 
+
 @implementation KBCollectionCell
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -22,8 +23,15 @@
         self.contentView.layer.masksToBounds = YES;
         
         ////Setting up main label
-        self.label = [UILabel new];
-        self.label.font=[UIFont systemFontOfSize:16];
+self.label = [[UILabel alloc]
+            initWithFrame:CGRectMake(15, 0, frame.size.width - 30,
+                                     frame.size.height)];
+self.label.adjustsFontSizeToFitWidth = YES;
+        self.label.minimumScaleFactor = 0;
+        self.label.numberOfLines = 0;
+        [self.label setFont:[UIFont fontWithName:@".SFUIDisplay-Bold" size:100]];
+        self.label.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+
         [self.contentView addSubview:self.label];
     }
     return self;

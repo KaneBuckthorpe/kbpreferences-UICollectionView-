@@ -218,39 +218,6 @@
     return reusableview;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView
-                             layout:(UICollectionViewFlowLayout *)
-                                        collectionViewLayout
-    referenceSizeForFooterInSection:(NSInteger)section {
-
-    PSSpecifier *specifier = [[self specifiersInGroup:section] firstObject];
-
-    if ([specifier propertyForKey:@"footerText"]) {
-        return collectionViewLayout.footerReferenceSize;
-    } else {
-        return CGSizeMake(collectionViewLayout.footerReferenceSize.width, 0);
-    }
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView
-                             layout:(UICollectionViewFlowLayout *)
-                                        collectionViewLayout
-    referenceSizeForHeaderInSection:(NSInteger)section {
-
-    PSSpecifier *specifier = [[self specifiersInGroup:section] firstObject];
-
-    if (specifier.name) {
-        return [specifier propertyForKey:@"height"]
-                   ? CGSizeMake(collectionViewLayout.headerReferenceSize.width,
-                                [[specifier propertyForKey:@"height"] intValue])
-                   : collectionViewLayout.headerReferenceSize;
-    } else {
-        return CGSizeMake(collectionViewLayout.headerReferenceSize.width, 0);
-    }
-
-    return collectionViewLayout.headerReferenceSize;
-}
-
 - (NSInteger)numberOfSectionsInCollectionView:
     (UICollectionView *)collectionView {
 
@@ -264,14 +231,21 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+	                  
+	PSSpecifier* specifier=[[self specifiersInGroup:indexPath.section]objectAtIndex:indexPath.row+1];
+	
+	NSLog(@"specifier:%@ %ld",specifier,indexPath.row+1);
+		NSLog(@"specifierInGroup:%@",[self specifiersInGroup:indexPath.section]);
+	
     KBCollectionCell *cell = [collectionView
-        dequeueReusableCellWithReuseIdentifier:@"KBCollectionCell"
+        dequeueReusableCellWithReuseIdentifier:[specifier propertyForKey:@"cell"]
                                   forIndexPath:indexPath];
-    cell.label.text = @"test";
-    [cell.label sizeToFit];
+
+    cell.specifier=specifier;
+    cell.label.text = cell.specifier.name;
+    ///[cell.label sizeToFit];
     cell.label.center = CGPointMake((cell.label.bounds.size.width / 2) + 15,
                                     cell.contentView.center.y);
-
     UIBezierPath *maskPath;
 
     if ([self rowsForGroup:indexPath.section] == 1) {
@@ -314,10 +288,50 @@
 
     return cell;
 }
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                             layout:(UICollectionViewFlowLayout *)
+                                        collectionViewLayout
+    referenceSizeForFooterInSection:(NSInteger)section {
+
+    PSSpecifier *specifier = [[self specifiersInGroup:section] firstObject];
+
+    if ([specifier propertyForKey:@"footerText"]) {
+        return collectionViewLayout.footerReferenceSize;
+    } else {
+        return CGSizeMake(collectionViewLayout.footerReferenceSize.width, 0);
+    }
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                             layout:(UICollectionViewFlowLayout *)
+                                        collectionViewLayout
+    referenceSizeForHeaderInSection:(NSInteger)section {
+
+    PSSpecifier *specifier = [[self specifiersInGroup:section] firstObject];
+
+    if (specifier.name) {
+        return [specifier propertyForKey:@"height"]
+                   ? CGSizeMake(collectionViewLayout.headerReferenceSize.width,
+                                [[specifier propertyForKey:@"height"] intValue])
+                   : collectionViewLayout.headerReferenceSize;
+    } else {
+        return CGSizeMake(collectionViewLayout.headerReferenceSize.width, 0);
+    }
+
+    return collectionViewLayout.headerReferenceSize;
+}
+
 - (CGSize)collectionView:(UICollectionView *)collectionView
                     layout:(UICollectionViewFlowLayout *)collectionViewLayout
     sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return collectionViewLayout.itemSize;
+	    
+	    PSSpecifier *specifier = [[self specifiersInGroup:indexPath.section] objectAtIndex:indexPath.row+1];
+	    
+	    return [specifier propertyForKey:@"height"]
+                   ? CGSizeMake(collectionViewLayout.itemSize.width,
+                                [[specifier propertyForKey:@"height"] intValue])
+                   : collectionViewLayout.itemSize;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
