@@ -1,5 +1,5 @@
-# kbpreferences
-
+# kbpreferences (UICollectionView)
+Made to show off what *could* be done with preferences, and how far customisations could go. 
 ### General 
 
 |  Key |     Type    |      Options     |
